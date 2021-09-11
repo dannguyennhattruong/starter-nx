@@ -1,13 +1,29 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Message } from '@monitoring/api-interfaces';
+/**
+ * @license
+ * Copyright Akveo. All Rights Reserved.
+ * Licensed under the MIT License. See License.txt in the project root for license information.
+ */
+import { Component, OnInit } from '@angular/core';
+import { AnalyticsService } from './@core/utils/analytics.service';
+import { SeoService } from './@core/utils/seo.service';
+import { MENU_ITEMS } from './pages/pages-menu';
 
 @Component({
-  selector: 'monitoring-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'ait-monitoring',
+  template: ` <ngx-one-column-layout>
+    <nb-menu [items]="menu"></nb-menu>
+    <router-outlet></router-outlet>
+  </ngx-one-column-layout>`,
 })
-export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+export class AppComponent implements OnInit {
+  constructor(
+    private analytics: AnalyticsService,
+    private seoService: SeoService
+  ) {}
+  menu = MENU_ITEMS;
+
+  ngOnInit(): void {
+    this.analytics.trackPageViews();
+    this.seoService.trackCanonicalChanges();
+  }
 }

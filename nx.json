@@ -27,7 +27,7 @@
     ]
   },
   "projects": {
-    "api": {
+    "monitoring-api": {
       "tags": []
     },
     "api-interfaces": {

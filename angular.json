@@ -1,19 +1,19 @@
 {
   "version": 1,
   "projects": {
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
+    "monitoring-api": {
+      "root": "apps/monitoring-api",
+      "sourceRoot": "apps/monitoring-api/src",
       "projectType": "application",
       "architect": {
         "build": {
           "builder": "@nrwl/node:build",
           "outputs": ["{options.outputPath}"],
           "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "outputPath": "dist/apps/monitoring-api",
+            "main": "apps/monitoring-api/src/main.ts",
+            "tsConfig": "apps/monitoring-api/tsconfig.app.json",
+            "assets": ["apps/monitoring-api/src/assets"]
           },
           "configurations": {
             "production": {
@@ -22,8 +22,8 @@
               "inspect": false,
               "fileReplacements": [
                 {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
+                  "replace": "apps/monitoring-api/src/environments/environment.ts",
+                  "with": "apps/monitoring-api/src/environments/environment.prod.ts"
                 }
               ]
             }
@@ -32,21 +32,21 @@
         "serve": {
           "builder": "@nrwl/node:execute",
           "options": {
-            "buildTarget": "api:build"
+            "buildTarget": "monitoring-api:build"
           }
         },
         "lint": {
           "builder": "@nrwl/linter:eslint",
           "outputs": ["{options.outputFile}"],
           "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
+            "lintFilePatterns": ["apps/monitoring-api/**/*.ts"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
+          "outputs": ["coverage/apps/monitoring-api"],
           "options": {
-            "jestConfig": "apps/api/jest.config.js",
+            "jestConfig": "apps/monitoring-api/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -86,7 +86,7 @@
               "apps/monitoring-webapp/src/favicon.ico",
               "apps/monitoring-webapp/src/assets"
             ],
-            "styles": ["apps/monitoring-webapp/src/styles.scss"],
+            "styles": ["apps/monitoring-webapp/src/styles.scss", "node_modules/@nebular/theme/styles/prebuilt/default.css"],
             "scripts": []
           },
           "configurations": {
